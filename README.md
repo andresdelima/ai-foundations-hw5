@@ -37,38 +37,79 @@ pip install -r requirements.txt
 cd frontend && npm install && cd ..
 ```
 
-Both databases are included in `data/`:
-- `campus_customs.db`: the **original**. Never modified, and used for resets.
-- `campus_customs_new.db`: the **working copy**. It's committed in its state after the P9 full run (3 resolved tickets, $160.00 in checking, 2 approved payments). Click **Reset shop** on the board, or call `POST /api/reset`, to start fresh from $3,400.00.
+## Run it, step by step
 
-## Run
+Run every command from the repo root unless a step says otherwise, with the virtual environment active (`source .venv/bin/activate`).
 
-**Terminal 1: backend** (http://localhost:8000, docs at `/docs`)
+### 1. Copy the original database to the working copy (for a clean run)
+
+`data/` has two databases:
+- **`campus_customs.db`:** the **original**. It's never modified.
+- **`campus_customs_new.db`:** the **working copy**. The MCP server, and so every agent and the backend, reads and writes only this file. It's committed in its state after my P9 full run: 3 resolved tickets, $160.00 in checking, 2 approved payments.
+
+To get a clean run, overwrite the working copy with the original:
+
+```bash
+cp data/campus_customs.db data/campus_customs_new.db          # macOS / Linux
+# copy data\campus_customs.db data\campus_customs_new.db      # Windows
+```
+
+Afterwards the shop is back to the start: 3 open tickets, $3,400.00 in checking, no payments and no drafts. The MCP server recreates its two board tables (`payment_requests`, `drafts`) on first use.
+
+### 2. Start the MCP server
+
+The **backend attaches the MCP server in-process**, so you don't need a separate terminal for the app: starting the backend (step 3) starts it too. The server is `mcp_server/server.py` (FastMCP, 22 tools over `data/campus_customs_new.db`).
+
+To run it on its own, for example to test the tools or connect a coding assistant:
+
+```bash
+python mcp_server/server.py          # stdio (what .mcp.json uses)
+python mcp_server/server.py --http   # HTTP at http://127.0.0.1:8001/mcp
+```
+
+`.mcp.json` registers it for a coding assistant as `campus-customs`, running `.venv/bin/python mcp_server/server.py` from the repo root. A standalone copy can read and draft but **can't approve payments**: approval needs a key that only the running backend has.
+
+### 3. Start the FastAPI backend (terminal 1)
+
 ```bash
 cd backend
 uvicorn main:app --reload --port 8000
 ```
 
-**Terminal 2: dashboard** (http://localhost:5173)
+The backend runs at http://localhost:8000, and http://localhost:8000/docs lists every route. It loads `PORTKEY_API_KEY` from `.env`, and every agent runs on `gpt-6-luna`.
+
+### 4. Start the React board (terminal 2)
+
 ```bash
 cd frontend
 npm run dev
 ```
 
-On the board:
-1. Click **Reset shop**.
-2. Pick a ticket and click **Send in the team**.
-3. Type your name under **Signing as**, then **Approve & pay** when the agents ask.
+Open http://localhost:5173. The board calls the backend at `http://localhost:8000`.
 
-After you approve, the team goes back in automatically to finish the ticket.
+### 5. Reset the database before a full 3-ticket run
+
+Always start a full run from the original data. Any one of these resets it:
+- On the board, click **Reset shop**.
+- Call `curl -X POST http://localhost:8000/api/reset`.
+- Run the `cp` command from step 1 (with the backend stopped).
+
+Reset keeps `output/audit_trail.json` and logs the reset in it. Then work the tickets in order, because they share one cash account:
+
+1. **101:** click **Send in the team**. When the agents ask, type your name under **Signing as** and approve request #1 ($840 for invoice 501). The team goes back in automatically and resolves the ticket.
+2. **102:** send in the team, then approve request #2 ($2,400 rent). The follow-up resolves it.
+3. **103:** send in the team. There's no payment; the 15% discount is set and the ticket resolves.
+
+Expected cash: **$3,400.00 → $2,560.00 → $160.00 → $160.00**. That should match `cash_accounts.checking` in the working copy.
 
 **Without the UI**, from `backend/`:
+
 ```bash
-python team.py --all            # reset, then work every open ticket
-python team.py --ticket 101     # reset, then work one ticket
+python team.py --all            # resets the DB, then works all open tickets
+python team.py --ticket 101     # resets, then works one ticket (add --no-reset to continue)
 ```
 
-**The MCP server in a coding assistant:** `.mcp.json` registers it as `campus-customs`. It runs `.venv/bin/python mcp_server/server.py` from the repo root. Agents and assistants can't approve payments: that tool needs a key that only the running backend has.
+Payments still need a person: approve them through the board or `POST /api/payments/{id}/approve` with `{"approver": "your name"}`.
 
 ## API routes
 

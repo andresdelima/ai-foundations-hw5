@@ -357,3 +357,7 @@ None needed.
 > (Attached the expected file layout image: hw5/ with AI_prompts.md, requirements.txt, .env.example, .gitignore, .mcp.json, README.md, data/, mcp_server/, frontend/, backend/ and output/)
 
 **What was lacking:** The first prompt said the file layout would follow in an image, so the vibe coder waited for it before creating the repo, to make sure the files matched.
+
+> README should explain: copy original DB to the working copy when you need a clean run, start MCP server, start FastAPI backend, start the React board, reset the DB before a full 3 ticket run
+
+**What was lacking:** The first README had setup and run commands but didn't spell out copying the original database for a clean run, how the MCP server starts, or resetting before a full 3-ticket run.
