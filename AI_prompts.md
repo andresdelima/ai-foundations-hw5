@@ -341,3 +341,19 @@ None needed.
 
 > (Picked in the vibe coder's option menu) Approvals: unblock first felt right · Return policy: 30 days, unworn with tags · Credit terms: net-30
 
+
+## Publishing: Public GitHub Repo
+
+### Prompt Typed
+
+> Push your code to a public GitHub repository so graders can clone it. I will submit the repo URL to canvas. Also put it in output/github_url.txt
+>
+> Do not push your real .env to the GitHub repo. Do include both database files under data/ (the original and the working copy) so graders can run your app easily.
+>
+> Expected file layout will be attached in an image to follow:
+
+### Follow-Up Prompt
+
+> (Attached the expected file layout image: hw5/ with AI_prompts.md, requirements.txt, .env.example, .gitignore, .mcp.json, README.md, data/, mcp_server/, frontend/, backend/ and output/)
+
+**What was lacking:** The first prompt said the file layout would follow in an image, so the vibe coder waited for it before creating the repo, to make sure the files matched.
