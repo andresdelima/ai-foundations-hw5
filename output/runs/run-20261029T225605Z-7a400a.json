@@ -1,0 +1,912 @@
+{
+  "run_id": "20261029T225605Z-7a400a",
+  "started_at": "2026-10-29T22:56:05+00:00",
+  "finished_at": "2026-10-29T22:56:36+00:00",
+  "model": "gpt-6-luna",
+  "database": "campus_customs_new.db",
+  "reset": null,
+  "tickets": [
+    {
+      "ticket_id": 102,
+      "decision": {
+        "ticket_id": 102,
+        "decision": "Rent of $2,400.00 for lease 1 is due 2026-09-02, two days from today. Payment request #2 is pending human approval; payment has not been made.",
+        "status": "waiting_approval",
+        "who_worked": [
+          "boss",
+          "facilities",
+          "accounting"
+        ],
+        "payment_request_ids": [
+          2
+        ],
+        "draft_ids": [],
+        "discount": null,
+        "note": "Lease 1, Chapel Street shop, Elm City Properties: monthly rent $2,400.00; due 2026-09-02 (2 days away as of 2026-08-31). Request #2 for $2,400.00 is pending."
+      },
+      "delegations": 2,
+      "usage": {
+        "requests": 10,
+        "input_tokens": 25977,
+        "output_tokens": 1332
+      },
+      "events": [
+        {
+          "ts": "2026-10-29T22:56:05.226+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "ticket_start",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "type": "rent_notice",
+            "requester": "Elm City Properties",
+            "subject": "Rent due"
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:08.528+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Work ticket 102 (rent_notice: Rent due, from Elm City Properties). Start with get_ticket(102), route it to the right agents, and make the final call.",
+            "tool_calls": [
+              {
+                "tool": "get_ticket",
+                "args": {
+                  "ticket_id": 102
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2630,
+              "output_tokens": 19
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:08.545+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_ticket",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 102
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "ticket": {
+                "id": 102,
+                "type": "rent_notice",
+                "requester": "Elm City Properties",
+                "subject": "Rent due",
+                "sku": null,
+                "size": null,
+                "qty": null,
+                "lease_id": 1,
+                "invoice_id": null,
+                "status": "in_progress",
+                "notes": "Email: shop rent due in 2 days.\n[2026-08-31 boss] in_progress: Boss picked up the ticket.",
+                "created_at": "2026-08-31T11:05:00-04:00"
+              },
+              "linked": {
+                "lease": {
+                  "id": 1,
+                  "space_name": "Chapel Street shop",
+                  "landlord": "Elm City Properties",
+                  "monthly_rent": 2400.0,
+                  "next_due": "2026-09-02",
+                  "notes": null
+                }
+              },
+              "drafts": [],
+              "payment_requests": []
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:11.140+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "delegate",
+                "args": {
+                  "to": "facilities",
+                  "task": "Ticket 102 rent_notice from Elm City Properties. get_ticket shows lease 1, Chapel Street shop, monthly_rent $2,400.00, next_due 2026-09-02, today 2026-08-31, and no lease notes. Confirm lease, amount, due date, and days until/overdue."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2831,
+              "output_tokens": 136
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:11.155+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "delegate",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": "facilities",
+          "model": null,
+          "detail": {
+            "task": "Ticket 102 rent_notice from Elm City Properties. get_ticket shows lease 1, Chapel Street shop, monthly_rent $2,400.00, next_due 2026-09-02, today 2026-08-31, and no lease notes. Confirm lease, amount, due date, and days until/overdue.",
+            "delegations_used": 1
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:12.938+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Ticket 102 rent_notice from Elm City Properties. get_ticket shows lease 1, Chapel Street shop, monthly_rent $2,400.00, next_due 2026-09-02, today 2026-08-31, and no lease notes. Confirm lease, amount, due date, and days until/overdue.",
+            "tool_calls": [
+              {
+                "tool": "get_lease_rent",
+                "args": {
+                  "lease_id": 1
+                }
+              },
+              {
+                "tool": "get_cash_balance",
+                "args": {}
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 1594,
+              "output_tokens": 81
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:12.956+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_lease_rent",
+            "via": "mcp",
+            "args": {
+              "lease_id": 1
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "lease_id": 1,
+              "space_name": "Chapel Street shop",
+              "landlord": "Elm City Properties",
+              "monthly_rent": 2400.0,
+              "next_due": "2026-09-02",
+              "days_until_due": 2,
+              "status": "not yet due",
+              "notes": null,
+              "cash_accounts": [
+                {
+                  "name": "checking",
+                  "balance": 2560.0,
+                  "as_of": "2026-08-31",
+                  "covers_rent": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:12.964+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_cash_balance",
+            "via": "mcp",
+            "args": {},
+            "result": {
+              "today": "2026-08-31",
+              "account": "checking",
+              "balance": 2560.0,
+              "as_of": "2026-08-31",
+              "committed_to_requests": 0,
+              "available_after_requests": 2560.0
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:15.608+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "delegate",
+                "args": {
+                  "to": "accounting",
+                  "task": "Ticket 102: Please request the rent payment for lease 1, Chapel Street shop, landlord Elm City Properties. Lease tool confirms monthly rent $2,400.00, next_due 2026-09-02, today 2026-08-31 (2 days until due). Available checking cash is $2,560.00 with $0.00 committed. Request payment only; human approval is required."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 1847,
+              "output_tokens": 185
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:15.620+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "delegate",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": "accounting",
+          "model": null,
+          "detail": {
+            "task": "Ticket 102: Please request the rent payment for lease 1, Chapel Street shop, landlord Elm City Properties. Lease tool confirms monthly rent $2,400.00, next_due 2026-09-02, today 2026-08-31 (2 days until due). Available checking cash is $2,560.00 with $0.00 committed. Request payment only; human approval is required.",
+            "delegations_used": 2
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:23.067+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Ticket 102: Please request the rent payment for lease 1, Chapel Street shop, landlord Elm City Properties. Lease tool confirms monthly rent $2,400.00, next_due 2026-09-02, today 2026-08-31 (2 days until due). Available checking cash is $2,560.00 with $0.00 committed. Request payment only; human approval is required.",
+            "tool_calls": [
+              {
+                "tool": "get_lease_rent",
+                "args": {
+                  "lease_id": 1
+                }
+              },
+              {
+                "tool": "get_cash_balance",
+                "args": {}
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2457,
+              "output_tokens": 96
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:23.083+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_cash_balance",
+            "via": "mcp",
+            "args": {},
+            "result": {
+              "today": "2026-08-31",
+              "account": "checking",
+              "balance": 2560.0,
+              "as_of": "2026-08-31",
+              "committed_to_requests": 0,
+              "available_after_requests": 2560.0
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:23.091+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_lease_rent",
+            "via": "mcp",
+            "args": {
+              "lease_id": 1
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "lease_id": 1,
+              "space_name": "Chapel Street shop",
+              "landlord": "Elm City Properties",
+              "monthly_rent": 2400.0,
+              "next_due": "2026-09-02",
+              "days_until_due": 2,
+              "status": "not yet due",
+              "notes": null,
+              "cash_accounts": [
+                {
+                  "name": "checking",
+                  "balance": 2560.0,
+                  "as_of": "2026-08-31",
+                  "covers_rent": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:24.790+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "request_payment",
+                "args": {
+                  "kind": "rent",
+                  "ref_id": 1,
+                  "reason": "Request rent payment for Chapel Street shop, due 2026-09-02.",
+                  "ticket_id": 102
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2725,
+              "output_tokens": 60
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:24.804+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "request_payment",
+            "via": "mcp",
+            "args": {
+              "kind": "rent",
+              "ref_id": 1,
+              "reason": "Request rent payment for Chapel Street shop, due 2026-09-02.",
+              "ticket_id": 102,
+              "actor": "accounting"
+            },
+            "result": {
+              "created": true,
+              "request": {
+                "id": 2,
+                "kind": "rent",
+                "ref_id": 1,
+                "amount": 2400.0,
+                "payee": "Elm City Properties",
+                "reason": "Request rent payment for Chapel Street shop, due 2026-09-02.",
+                "ticket_id": 102,
+                "requested_by": "accounting",
+                "status": "pending",
+                "requested_on": "2026-08-31",
+                "decided_by": null,
+                "decided_on": null,
+                "payment_id": null
+              },
+              "needs_human_approval": true,
+              "account": "checking",
+              "balance": 2560.0,
+              "as_of": "2026-08-31",
+              "committed_to_requests": 2400.0,
+              "available_after_requests": 160.0
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:27.722+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "summary": "Requested the $2,400.00 rent payment for lease 1; request #2 is pending human approval.",
+                  "facts": [
+                    "Lease 1, Chapel Street shop, landlord Elm City Properties; monthly rent $2,400.00, due 2026-09-02 (2 days away as of 2026-08-31).",
+                    "Checking balance before request: $2,560.00; committed before request: $0.00; available before request: $2,560.00.",
+                    "After request #2: committed to requests $2,400.00; available after requests $160.00."
+                  ],
+                  "actions": [
+                    "Payment request #2 for rent, $2,400.00 \u2014 awaiting human approval."
+                  ],
+                  "blockers": [
+                    "Human approval is required; payment has not been made."
+                  ],
+                  "recommendation": "Have a human review request #2 before the 2026-09-02 due date."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2938,
+              "output_tokens": 218
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:27.730+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "report",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "facilities",
+            "accounting"
+          ],
+          "to": "facilities",
+          "model": null,
+          "detail": {
+            "summary": "Requested the $2,400.00 rent payment for lease 1; request #2 is pending human approval.",
+            "facts": [
+              "Lease 1, Chapel Street shop, landlord Elm City Properties; monthly rent $2,400.00, due 2026-09-02 (2 days away as of 2026-08-31).",
+              "Checking balance before request: $2,560.00; committed before request: $0.00; available before request: $2,560.00.",
+              "After request #2: committed to requests $2,400.00; available after requests $160.00."
+            ],
+            "actions": [
+              "Payment request #2 for rent, $2,400.00 \u2014 awaiting human approval."
+            ],
+            "blockers": [
+              "Human approval is required; payment has not been made."
+            ],
+            "recommendation": "Have a human review request #2 before the 2026-09-02 due date."
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:30.525+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "summary": "Confirmed lease 1 for the Chapel Street shop with Elm City Properties: monthly rent is $2,400.00, due 2026-09-02, which is 2 days away as of 2026-08-31. Accounting requested payment; it is pending human approval.",
+                  "facts": [
+                    "Lease 1: Chapel Street shop; landlord: Elm City Properties.",
+                    "Monthly rent: $2,400.00; next due: 2026-09-02; status: not yet due; 2 days until due.",
+                    "Checking balance: $2,560.00; committed before request: $0.00; after rent request #2, available balance is $160.00."
+                  ],
+                  "actions": [
+                    "Accounting submitted rent payment request #2 for $2,400.00."
+                  ],
+                  "blockers": [
+                    "Request #2 awaits human approval; payment has not been made."
+                  ],
+                  "recommendation": "Have a human review payment request #2 before the 2026-09-02 due date."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2244,
+              "output_tokens": 247
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:30.535+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "report",
+          "agent": "facilities",
+          "chain": [
+            "boss",
+            "facilities"
+          ],
+          "to": "boss",
+          "model": null,
+          "detail": {
+            "summary": "Confirmed lease 1 for the Chapel Street shop with Elm City Properties: monthly rent is $2,400.00, due 2026-09-02, which is 2 days away as of 2026-08-31. Accounting requested payment; it is pending human approval.",
+            "facts": [
+              "Lease 1: Chapel Street shop; landlord: Elm City Properties.",
+              "Monthly rent: $2,400.00; next due: 2026-09-02; status: not yet due; 2 days until due.",
+              "Checking balance: $2,560.00; committed before request: $0.00; after rent request #2, available balance is $160.00."
+            ],
+            "actions": [
+              "Accounting submitted rent payment request #2 for $2,400.00."
+            ],
+            "blockers": [
+              "Request #2 awaits human approval; payment has not been made."
+            ],
+            "recommendation": "Have a human review payment request #2 before the 2026-09-02 due date."
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:33.373+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "get_ticket",
+                "args": {
+                  "ticket_id": 102
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 3192,
+              "output_tokens": 120
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:33.393+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "tool",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_ticket",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 102
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "ticket": {
+                "id": 102,
+                "type": "rent_notice",
+                "requester": "Elm City Properties",
+                "subject": "Rent due",
+                "sku": null,
+                "size": null,
+                "qty": null,
+                "lease_id": 1,
+                "invoice_id": null,
+                "status": "in_progress",
+                "notes": "Email: shop rent due in 2 days.\n[2026-08-31 boss] in_progress: Boss picked up the ticket.",
+                "created_at": "2026-08-31T11:05:00-04:00"
+              },
+              "linked": {
+                "lease": {
+                  "id": 1,
+                  "space_name": "Chapel Street shop",
+                  "landlord": "Elm City Properties",
+                  "monthly_rent": 2400.0,
+                  "next_due": "2026-09-02",
+                  "notes": null
+                }
+              },
+              "drafts": [],
+              "payment_requests": [
+                {
+                  "id": 2,
+                  "kind": "rent",
+                  "ref_id": 1,
+                  "amount": 2400.0,
+                  "status": "pending"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:36.095+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 4,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "ticket_id": 102,
+                  "decision": "Rent of $2,400.00 for lease 1 is due 2026-09-02, two days from today. Payment request #2 is pending human approval; payment has not been made.",
+                  "status": "waiting_approval",
+                  "who_worked": [
+                    "boss",
+                    "facilities",
+                    "accounting"
+                  ],
+                  "payment_request_ids": [
+                    2
+                  ],
+                  "note": "Lease 1, Chapel Street shop, Elm City Properties: monthly rent $2,400.00; due 2026-09-02 (2 days away as of 2026-08-31). Request #2 for $2,400.00 is pending."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 3519,
+              "output_tokens": 170
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T22:56:36.124+00:00",
+          "run_id": "20261029T225605Z-7a400a",
+          "ticket_id": 102,
+          "kind": "decision",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna",
+          "detail": {
+            "ticket_id": 102,
+            "decision": "Rent of $2,400.00 for lease 1 is due 2026-09-02, two days from today. Payment request #2 is pending human approval; payment has not been made.",
+            "status": "waiting_approval",
+            "who_worked": [
+              "boss",
+              "facilities",
+              "accounting"
+            ],
+            "payment_request_ids": [
+              2
+            ],
+            "draft_ids": [],
+            "discount": null,
+            "note": "Lease 1, Chapel Street shop, Elm City Properties: monthly rent $2,400.00; due 2026-09-02 (2 days away as of 2026-08-31). Request #2 for $2,400.00 is pending."
+          }
+        }
+      ]
+    }
+  ],
+  "board_after": {
+    "tickets": {
+      "count": 2,
+      "tickets": [
+        {
+          "id": 102,
+          "type": "rent_notice",
+          "requester": "Elm City Properties",
+          "subject": "Rent due",
+          "status": "waiting_approval",
+          "created_at": "2026-08-31T11:05:00-04:00"
+        },
+        {
+          "id": 103,
+          "type": "price_override",
+          "requester": "Yale AI Club",
+          "subject": "Bulk hoodie discount",
+          "status": "open",
+          "created_at": "2026-08-31T16:55:00-04:00"
+        }
+      ]
+    },
+    "payment_requests": {
+      "requests": [
+        {
+          "id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "payee": "Bulldog Print Co",
+          "reason": "Overdue vendor invoice blocking customer order ticket 101; request payment to unblock the vendor shipment.",
+          "ticket_id": 101,
+          "requested_by": "accounting",
+          "status": "paid",
+          "requested_on": "2026-08-31",
+          "decided_by": "Andres de Lima",
+          "decided_on": "2026-08-31",
+          "payment_id": 1
+        },
+        {
+          "id": 2,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "reason": "Request rent payment for Chapel Street shop, due 2026-09-02.",
+          "ticket_id": 102,
+          "requested_by": "accounting",
+          "status": "pending",
+          "requested_on": "2026-08-31",
+          "decided_by": null,
+          "decided_on": null,
+          "payment_id": null
+        }
+      ],
+      "account": "checking",
+      "balance": 2560.0,
+      "as_of": "2026-08-31",
+      "committed_to_requests": 2400.0,
+      "available_after_requests": 160.0
+    },
+    "drafts": {
+      "drafts": [
+        {
+          "id": 1,
+          "ticket_id": 101,
+          "kind": "customer_message",
+          "recipient": "Tauhid Zaman",
+          "subject": "Update on your Bulldog tee",
+          "body": "Hi Tauhid,\n\nThanks for your order! We don\u2019t have the CC-TEE-WHITE in size S available right now. We\u2019re waiting on a supplier restock; once it ships, the lead time is about 5 days, so I can\u2019t promise a firm calendar date yet.\n\nReply to confirm you\u2019d like us to keep your order open while we arrange the restock.",
+          "created_by": "customer_service",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        },
+        {
+          "id": 2,
+          "ticket_id": 101,
+          "kind": "restock_order",
+          "recipient": "Bulldog Print Co",
+          "subject": "Restock CC-TEE-WHITE S x1",
+          "body": "Restock request: 1 x Classic Bulldog Tee (CC-TEE-WHITE, size S). Estimated cost 1 x $8.00 = $8.00. Lead time 5 days -> ETA 2026-09-05 if placed 2026-08-31.",
+          "created_by": "inventory",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        },
+        {
+          "id": 3,
+          "ticket_id": 101,
+          "kind": "customer_message",
+          "recipient": "Tauhid Zaman",
+          "subject": "Updated Bulldog tee restock update",
+          "body": "Hi Tauhid,\n\nGood news: the supplier can now ship your CC-TEE-WHITE tee in size S. We have 0 in stock and are 1 short for your order. We haven't placed the supplier order yet; if placed today, its estimated arrival is 2026-09-05 (about 5 days).\n\nReply to confirm you'd like us to keep your order open while we arrange the restock.",
+          "created_by": "customer_service",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        }
+      ]
+    }
+  },
+  "usage_total": {
+    "requests": 10,
+    "input_tokens": 25977,
+    "output_tokens": 1332
+  }
+}

@@ -1,0 +1,7 @@
+# Python 3.12. Install from the HW5 folder: pip install -r requirements.txt
+fastmcp>=2.0.0
+pydantic>=2.7
+pydantic-ai-slim[openai,fastmcp]>=1.0.0
+python-dotenv>=1.0.1
+fastapi>=0.115
+uvicorn[standard]>=0.30

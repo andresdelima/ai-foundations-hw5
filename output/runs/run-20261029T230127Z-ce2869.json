@@ -1,0 +1,1594 @@
+{
+  "run_id": "20261029T230127Z-ce2869",
+  "started_at": "2026-10-29T23:01:27+00:00",
+  "finished_at": "2026-10-29T23:02:39+00:00",
+  "model": "gpt-6-luna",
+  "database": "campus_customs_new.db",
+  "reset": null,
+  "tickets": [
+    {
+      "ticket_id": 103,
+      "decision": {
+        "ticket_id": 103,
+        "decision": "Approved the 15% policy discount for all 20 hoodies and saved the customer update. The order is blocked for fulfillment: only 8 are on hand, and the 12-unit restock draft is $104.00 above available cash, so no restock is confirmed.",
+        "status": "blocked",
+        "who_worked": [
+          "boss",
+          "inventory",
+          "accounting",
+          "customer_service"
+        ],
+        "payment_request_ids": [],
+        "draft_ids": [
+          4,
+          5
+        ],
+        "discount": {
+          "pct": 0.15,
+          "unit_price": 49.3,
+          "qty": 20,
+          "total": 986.0,
+          "within_policy": true,
+          "needs_human": false
+        },
+        "note": "List total $1,160.00; discounted total $986.00. 8 of 20 size-M hoodies are in stock; 12-unit restock draft #4 costs $264.00. Available cash after requests is $160.00 (gap $104.00). Vendor lead time is 5 days; estimated ETA 2026-09-05 only if restock can be placed. Customer update draft #5 saved."
+      },
+      "delegations": 3,
+      "usage": {
+        "requests": 17,
+        "input_tokens": 49508,
+        "output_tokens": 4842
+      },
+      "events": [
+        {
+          "ts": "2026-10-29T23:01:27.689+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "ticket_start",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "type": "price_override",
+            "requester": "Yale AI Club",
+            "subject": "Bulk hoodie discount"
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:31.405+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Work ticket 103 (price_override: Bulk hoodie discount, from Yale AI Club). Start with get_ticket(103), route it to the right agents, and make the final call.",
+            "tool_calls": [
+              {
+                "tool": "get_ticket",
+                "args": {
+                  "ticket_id": 103
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2631,
+              "output_tokens": 19
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:31.422+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_ticket",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 103
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "ticket": {
+                "id": 103,
+                "type": "price_override",
+                "requester": "Yale AI Club",
+                "subject": "Bulk hoodie discount",
+                "sku": "CC-HOOD-NAVY",
+                "size": "M",
+                "qty": 20,
+                "lease_id": null,
+                "invoice_id": null,
+                "status": "in_progress",
+                "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.\n[2026-08-31 boss] in_progress: Boss picked up the ticket.",
+                "created_at": "2026-08-31T16:55:00-04:00"
+              },
+              "linked": {
+                "inventory": {
+                  "sku": "CC-HOOD-NAVY",
+                  "name": "Basic Hoodie Big Yale",
+                  "size": "M",
+                  "qty": 8,
+                  "location": "Aisle A"
+                },
+                "pricing": {
+                  "sku": "CC-HOOD-NAVY",
+                  "unit_cost": 22.0,
+                  "list_price": 58.0
+                }
+              },
+              "drafts": [],
+              "payment_requests": []
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:34.798+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "delegate",
+                "args": {
+                  "to": "inventory",
+                  "task": "Ticket 103, price_override for Yale AI Club: SKU CC-HOOD-NAVY, size M, full order qty 20. Ticket row shows 8 in stock. Confirm available-to-fill/shortfall and whether restock can be placed, vendor/invoice blocker if any, and lead time/ETA from shop date 2026-08-31. Do not draft a customer message yet."
+                }
+              },
+              {
+                "tool": "check_discount_policy",
+                "args": {
+                  "sku": "CC-HOOD-NAVY",
+                  "qty": 20,
+                  "requested_pct": 15
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2861,
+              "output_tokens": 220
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:34.815+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "delegate",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": "inventory",
+          "model": null,
+          "detail": {
+            "task": "Ticket 103, price_override for Yale AI Club: SKU CC-HOOD-NAVY, size M, full order qty 20. Ticket row shows 8 in stock. Confirm available-to-fill/shortfall and whether restock can be placed, vendor/invoice blocker if any, and lead time/ETA from shop date 2026-08-31. Do not draft a customer message yet.",
+            "delegations_used": 1
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:34.837+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "check_discount_policy",
+            "via": "mcp",
+            "args": {
+              "sku": "CC-HOOD-NAVY",
+              "qty": 20,
+              "requested_pct": 15
+            },
+            "result": {
+              "found": true,
+              "sku": "CC-HOOD-NAVY",
+              "qty": 20,
+              "list_price": 58.0,
+              "unit_cost": 22.0,
+              "policy": "10% off list at 10+ units, 15% at 20+, never below 2x unit cost; outside this needs a human",
+              "tier_pct": 0.15,
+              "price_floor": 44.0,
+              "max_pct_allowed": 0.15,
+              "unit_price_at_max": 49.3,
+              "total_at_list": 1160.0,
+              "total_at_max": 986.0,
+              "margin_per_unit_at_max": 27.3,
+              "requested": {
+                "pct": 0.15,
+                "unit_price": 49.3,
+                "total": 986.0,
+                "within_policy": true,
+                "needs_human": false
+              }
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:37.411+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Ticket 103, price_override for Yale AI Club: SKU CC-HOOD-NAVY, size M, full order qty 20. Ticket row shows 8 in stock. Confirm available-to-fill/shortfall and whether restock can be placed, vendor/invoice blocker if any, and lead time/ETA from shop date 2026-08-31. Do not draft a customer message yet.",
+            "tool_calls": [
+              {
+                "tool": "get_ticket",
+                "args": {
+                  "ticket_id": 103
+                }
+              },
+              {
+                "tool": "check_order_fill",
+                "args": {
+                  "sku": "CC-HOOD-NAVY",
+                  "size": "M",
+                  "qty": 20
+                }
+              },
+              {
+                "tool": "get_shop_date",
+                "args": {}
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 1982,
+              "output_tokens": 126
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:37.433+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_shop_date",
+            "via": "mcp",
+            "args": {},
+            "result": {
+              "today": "2026-08-31",
+              "notes": null
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:37.443+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "check_order_fill",
+            "via": "mcp",
+            "args": {
+              "sku": "CC-HOOD-NAVY",
+              "size": "M",
+              "qty": 20
+            },
+            "result": {
+              "found": true,
+              "sku": "CC-HOOD-NAVY",
+              "name": "Basic Hoodie Big Yale",
+              "size": "M",
+              "location": "Aisle A",
+              "requested": 20,
+              "on_hand": 8,
+              "can_fill_from_stock": false,
+              "shortfall": 12,
+              "other_sizes_on_hand": {
+                "L": 14,
+                "S": 4,
+                "XL": 6
+              },
+              "pricing": {
+                "unit_cost": 22.0,
+                "list_price": 58.0,
+                "margin_per_unit": 36.0,
+                "order_total_at_list": 1160.0,
+                "order_total_at_cost": 440.0
+              }
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:37.452+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_ticket",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 103
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "ticket": {
+                "id": 103,
+                "type": "price_override",
+                "requester": "Yale AI Club",
+                "subject": "Bulk hoodie discount",
+                "sku": "CC-HOOD-NAVY",
+                "size": "M",
+                "qty": 20,
+                "lease_id": null,
+                "invoice_id": null,
+                "status": "in_progress",
+                "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.\n[2026-08-31 boss] in_progress: Boss picked up the ticket.",
+                "created_at": "2026-08-31T16:55:00-04:00"
+              },
+              "linked": {
+                "inventory": {
+                  "sku": "CC-HOOD-NAVY",
+                  "name": "Basic Hoodie Big Yale",
+                  "size": "M",
+                  "qty": 8,
+                  "location": "Aisle A"
+                },
+                "pricing": {
+                  "sku": "CC-HOOD-NAVY",
+                  "unit_cost": 22.0,
+                  "list_price": 58.0
+                }
+              },
+              "drafts": [],
+              "payment_requests": []
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:39.507+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "list_vendors",
+                "args": {}
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2466,
+              "output_tokens": 45
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:39.520+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "list_vendors",
+            "via": "mcp",
+            "args": {},
+            "result": {
+              "vendors": [
+                {
+                  "id": 1,
+                  "name": "Bulldog Print Co",
+                  "specialty": "apparel reprint",
+                  "lead_days": 5
+                },
+                {
+                  "id": 2,
+                  "name": "Elm City Gifts",
+                  "specialty": "mugs and small goods",
+                  "lead_days": 3
+                },
+                {
+                  "id": 3,
+                  "name": "QuickShip CT",
+                  "specialty": "local courier",
+                  "lead_days": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:41.304+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "get_vendor_status",
+                "args": {
+                  "vendor_id": 1
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2598,
+              "output_tokens": 32
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:41.325+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_vendor_status",
+            "via": "mcp",
+            "args": {
+              "vendor_id": 1
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "vendor_id": 1,
+              "name": "Bulldog Print Co",
+              "specialty": "apparel reprint",
+              "lead_days": 5,
+              "can_ship": true,
+              "open_invoices": [],
+              "open_balance": 0,
+              "reason": "No open invoices."
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:44.235+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 4,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "draft_restock_order",
+                "args": {
+                  "vendor_id": 1,
+                  "sku": "CC-HOOD-NAVY",
+                  "size": "M",
+                  "qty": 12,
+                  "ticket_id": 103,
+                  "actor": "inventory"
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2704,
+              "output_tokens": 136
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:44.256+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "draft_restock_order",
+            "via": "mcp",
+            "args": {
+              "vendor_id": 1,
+              "sku": "CC-HOOD-NAVY",
+              "size": "M",
+              "qty": 12,
+              "ticket_id": 103,
+              "actor": "inventory"
+            },
+            "result": {
+              "saved": true,
+              "draft_id": 4,
+              "vendor": "Bulldog Print Co",
+              "estimated_cost": 264.0,
+              "eta": "2026-09-05",
+              "sent": false,
+              "note": "Draft only. The vendor was not contacted.",
+              "cash_available_after_requests": 160.0,
+              "affordable_now": false
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:48.948+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 5,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "delegate",
+                "args": {
+                  "to": "accounting",
+                  "task": "Ticket 103: assess cash/affordability for the draft restock order. Inventory found CC-HOOD-NAVY size M shortfall 12; draft #4 with Bulldog Print Co estimated cost $264.00, reports cash_available_after_requests $160.00 and affordable_now false. Please report the cash constraint and any appropriate next step; do not claim payment unless approved/paid."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2918,
+              "output_tokens": 378
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:48.966+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "delegate",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": "accounting",
+          "model": null,
+          "detail": {
+            "task": "Ticket 103: assess cash/affordability for the draft restock order. Inventory found CC-HOOD-NAVY size M shortfall 12; draft #4 with Bulldog Print Co estimated cost $264.00, reports cash_available_after_requests $160.00 and affordable_now false. Please report the cash constraint and any appropriate next step; do not claim payment unless approved/paid.",
+            "delegations_used": 2
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:51.358+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Ticket 103: assess cash/affordability for the draft restock order. Inventory found CC-HOOD-NAVY size M shortfall 12; draft #4 with Bulldog Print Co estimated cost $264.00, reports cash_available_after_requests $160.00 and affordable_now false. Please report the cash constraint and any appropriate next step; do not claim payment unless approved/paid.",
+            "tool_calls": [
+              {
+                "tool": "get_cash_balance",
+                "args": {}
+              },
+              {
+                "tool": "get_ticket",
+                "args": {
+                  "ticket_id": 103
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2452,
+              "output_tokens": 124
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:51.378+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_cash_balance",
+            "via": "mcp",
+            "args": {},
+            "result": {
+              "today": "2026-08-31",
+              "account": "checking",
+              "balance": 160.0,
+              "as_of": "2026-08-31",
+              "committed_to_requests": 0,
+              "available_after_requests": 160.0
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:51.388+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_ticket",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 103
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "ticket": {
+                "id": 103,
+                "type": "price_override",
+                "requester": "Yale AI Club",
+                "subject": "Bulk hoodie discount",
+                "sku": "CC-HOOD-NAVY",
+                "size": "M",
+                "qty": 20,
+                "lease_id": null,
+                "invoice_id": null,
+                "status": "in_progress",
+                "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.\n[2026-08-31 boss] in_progress: Boss picked up the ticket.",
+                "created_at": "2026-08-31T16:55:00-04:00"
+              },
+              "linked": {
+                "inventory": {
+                  "sku": "CC-HOOD-NAVY",
+                  "name": "Basic Hoodie Big Yale",
+                  "size": "M",
+                  "qty": 8,
+                  "location": "Aisle A"
+                },
+                "pricing": {
+                  "sku": "CC-HOOD-NAVY",
+                  "unit_cost": 22.0,
+                  "list_price": 58.0
+                }
+              },
+              "drafts": [
+                {
+                  "id": 4,
+                  "kind": "restock_order",
+                  "recipient": "Bulldog Print Co",
+                  "subject": "Restock CC-HOOD-NAVY M x12",
+                  "created_by": "inventory"
+                }
+              ],
+              "payment_requests": []
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:54.434+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "check_order_fill",
+                "args": {
+                  "sku": "CC-HOOD-NAVY",
+                  "size": "M",
+                  "qty": 12
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2880,
+              "output_tokens": 177
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:01:54.449+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "check_order_fill",
+            "via": "mcp",
+            "args": {
+              "sku": "CC-HOOD-NAVY",
+              "size": "M",
+              "qty": 12
+            },
+            "result": {
+              "found": true,
+              "sku": "CC-HOOD-NAVY",
+              "name": "Basic Hoodie Big Yale",
+              "size": "M",
+              "location": "Aisle A",
+              "requested": 12,
+              "on_hand": 8,
+              "can_fill_from_stock": false,
+              "shortfall": 4,
+              "other_sizes_on_hand": {
+                "L": 14,
+                "S": 4,
+                "XL": 6
+              },
+              "pricing": {
+                "unit_cost": 22.0,
+                "list_price": 58.0,
+                "margin_per_unit": 36.0,
+                "order_total_at_list": 696.0,
+                "order_total_at_cost": 264.0
+              }
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:03.840+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "check_order_fill",
+                "args": {
+                  "sku": "CC-HOOD-NAVY",
+                  "size": "M",
+                  "qty": 20
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 3181,
+              "output_tokens": 365
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:03.857+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "check_order_fill",
+            "via": "mcp",
+            "args": {
+              "sku": "CC-HOOD-NAVY",
+              "size": "M",
+              "qty": 20
+            },
+            "result": {
+              "found": true,
+              "sku": "CC-HOOD-NAVY",
+              "name": "Basic Hoodie Big Yale",
+              "size": "M",
+              "location": "Aisle A",
+              "requested": 20,
+              "on_hand": 8,
+              "can_fill_from_stock": false,
+              "shortfall": 12,
+              "other_sizes_on_hand": {
+                "L": 14,
+                "S": 4,
+                "XL": 6
+              },
+              "pricing": {
+                "unit_cost": 22.0,
+                "list_price": 58.0,
+                "margin_per_unit": 36.0,
+                "order_total_at_list": 1160.0,
+                "order_total_at_cost": 440.0
+              }
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:10.468+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 4,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "summary": "The 12-unit restock draft is not affordable from current cash: its $264.00 cost exceeds available cash by $104.00. No payment request was created; keep the restock draft unsent until the order is resized or sufficient funds are available.",
+                  "facts": [
+                    "Checking balance: $160.00; committed to requests: $0.00; available after requests: $160.00 (as of 2026-08-31).",
+                    "For CC-HOOD-NAVY size M, 20 requested and 8 on hand means a shortfall of 12; unit cost is $22.00 and the 12-unit cost is $264.00.",
+                    "Ticket 103 has no linked invoice or payment request."
+                  ],
+                  "actions": [],
+                  "blockers": [
+                    "Current available cash is $104.00 below the 12-unit restock cost."
+                  ],
+                  "recommendation": "Do not send draft #4 yet. Have Inventory resize the draft to fit the available cash, or wait until funds are available; no payment request applies to this restock draft."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 3671,
+              "output_tokens": 588
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:10.485+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "report",
+          "agent": "accounting",
+          "chain": [
+            "boss",
+            "inventory",
+            "accounting"
+          ],
+          "to": "inventory",
+          "model": null,
+          "detail": {
+            "summary": "The 12-unit restock draft is not affordable from current cash: its $264.00 cost exceeds available cash by $104.00. No payment request was created; keep the restock draft unsent until the order is resized or sufficient funds are available.",
+            "facts": [
+              "Checking balance: $160.00; committed to requests: $0.00; available after requests: $160.00 (as of 2026-08-31).",
+              "For CC-HOOD-NAVY size M, 20 requested and 8 on hand means a shortfall of 12; unit cost is $22.00 and the 12-unit cost is $264.00.",
+              "Ticket 103 has no linked invoice or payment request."
+            ],
+            "actions": [],
+            "blockers": [
+              "Current available cash is $104.00 below the 12-unit restock cost."
+            ],
+            "recommendation": "Do not send draft #4 yet. Have Inventory resize the draft to fit the available cash, or wait until funds are available; no payment request applies to this restock draft."
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:14.762+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 6,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "summary": "Only 8 of the 20 size-M hoodies can be filled from stock, leaving a 12-unit shortfall. Bulldog Print Co can ship; restock draft #4 was saved but is not affordable now.",
+                  "facts": [
+                    "CC-HOOD-NAVY size M: 8 on hand in Aisle A; requested 20; shortfall 12. Other sizes on hand: S 4, L 14, XL 6.",
+                    "Vendor: Bulldog Print Co (apparel reprint), lead time 5 days; no open invoices and can_ship=true. From shop date 2026-08-31, estimated ETA is 2026-09-05.",
+                    "Draft #4 is for 12 units at estimated cost $264.00; affordable_now=false with $160.00 cash available after requests. Accounting reports the gap is $104.00. Ticket 103 has no linked invoice or payment request."
+                  ],
+                  "actions": [
+                    "Saved restock draft #4; vendor was not contacted.",
+                    "Delegated cash/affordability assessment to Accounting; no payment request was created."
+                  ],
+                  "blockers": [
+                    "Draft #4 should remain unsent: available cash is $104.00 below its $264.00 cost."
+                  ],
+                  "recommendation": "Do not send the draft yet. Resize it to fit available cash or wait until sufficient funds are available."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 3532,
+              "output_tokens": 310
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:14.778+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "report",
+          "agent": "inventory",
+          "chain": [
+            "boss",
+            "inventory"
+          ],
+          "to": "boss",
+          "model": null,
+          "detail": {
+            "summary": "Only 8 of the 20 size-M hoodies can be filled from stock, leaving a 12-unit shortfall. Bulldog Print Co can ship; restock draft #4 was saved but is not affordable now.",
+            "facts": [
+              "CC-HOOD-NAVY size M: 8 on hand in Aisle A; requested 20; shortfall 12. Other sizes on hand: S 4, L 14, XL 6.",
+              "Vendor: Bulldog Print Co (apparel reprint), lead time 5 days; no open invoices and can_ship=true. From shop date 2026-08-31, estimated ETA is 2026-09-05.",
+              "Draft #4 is for 12 units at estimated cost $264.00; affordable_now=false with $160.00 cash available after requests. Accounting reports the gap is $104.00. Ticket 103 has no linked invoice or payment request."
+            ],
+            "actions": [
+              "Saved restock draft #4; vendor was not contacted.",
+              "Delegated cash/affordability assessment to Accounting; no payment request was created."
+            ],
+            "blockers": [
+              "Draft #4 should remain unsent: available cash is $104.00 below its $264.00 cost."
+            ],
+            "recommendation": "Do not send the draft yet. Resize it to fit available cash or wait until sufficient funds are available."
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:23.289+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "delegate",
+                "args": {
+                  "to": "customer_service",
+                  "task": "Ticket 103, Yale AI Club price_override. Final quote: 15% off full 20-unit order, within policy; unit price $49.30 and total $986.00 (list total $1,160.00). Inventory confirms only 8 of 20 size-M CC-HOOD-NAVY on hand; shortfall 12. Bulldog Print Co has no open invoices, can ship, lead time 5 days; estimated ETA 2026-09-05 from shop date 2026-08-31 if restock can be placed. Inventory saved restock draft #4 for 12 units at estimated cost $264.00, but affordable_now=false: $160.00 available after requests, a $104.00 gap. Draft is not placed/sent; do not promise a restock order or firm arrival. Draft one accurate customer update stating 8 can be filled now, 12 are not yet confirmed for restock, and the confirmed discount/total."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 3544,
+              "output_tokens": 998
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:23.306+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "delegate",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": "customer_service",
+          "model": null,
+          "detail": {
+            "task": "Ticket 103, Yale AI Club price_override. Final quote: 15% off full 20-unit order, within policy; unit price $49.30 and total $986.00 (list total $1,160.00). Inventory confirms only 8 of 20 size-M CC-HOOD-NAVY on hand; shortfall 12. Bulldog Print Co has no open invoices, can ship, lead time 5 days; estimated ETA 2026-09-05 from shop date 2026-08-31 if restock can be placed. Inventory saved restock draft #4 for 12 units at estimated cost $264.00, but affordable_now=false: $160.00 available after requests, a $104.00 gap. Draft is not placed/sent; do not promise a restock order or firm arrival. Draft one accurate customer update stating 8 can be filled now, 12 are not yet confirmed for restock, and the confirmed discount/total.",
+            "delegations_used": 3
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:25.645+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 1,
+            "prompt": "Ticket 103, Yale AI Club price_override. Final quote: 15% off full 20-unit order, within policy; unit price $49.30 and total $986.00 (list total $1,160.00). Inventory confirms only 8 of 20 size-M CC-HOOD-NAVY on hand; shortfall 12. Bulldog Print Co has no open invoices, can ship, lead time 5 days; estimated ETA 2026-09-05 from shop date 2026-08-31 if restock can be placed. Inventory saved restock draft #4 for 12 units at estimated cost $264.00, but affordable_now=false: $160.00 available after requests, a $104.00 gap. Draft is not placed/sent; do not promise a restock order or firm arrival. Draft one accurate customer update stating 8 can be filled now, 12 are not yet confirmed for restock, and the confirmed discount/total.",
+            "tool_calls": [
+              {
+                "tool": "get_ticket",
+                "args": {
+                  "ticket_id": 103
+                }
+              },
+              {
+                "tool": "list_drafts",
+                "args": {
+                  "ticket_id": 103
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 1999,
+              "output_tokens": 89
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:25.666+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "list_drafts",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 103
+            },
+            "result": {
+              "drafts": [
+                {
+                  "id": 4,
+                  "ticket_id": 103,
+                  "kind": "restock_order",
+                  "recipient": "Bulldog Print Co",
+                  "subject": "Restock CC-HOOD-NAVY M x12",
+                  "body": "Restock request: 12 x Basic Hoodie Big Yale (CC-HOOD-NAVY, size M). Estimated cost 12 x $22.00 = $264.00. Lead time 5 days -> ETA 2026-09-05 if placed 2026-08-31.",
+                  "created_by": "inventory",
+                  "created_on": "2026-08-31",
+                  "status": "draft"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:25.677+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "get_ticket",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 103
+            },
+            "result": {
+              "found": true,
+              "today": "2026-08-31",
+              "ticket": {
+                "id": 103,
+                "type": "price_override",
+                "requester": "Yale AI Club",
+                "subject": "Bulk hoodie discount",
+                "sku": "CC-HOOD-NAVY",
+                "size": "M",
+                "qty": 20,
+                "lease_id": null,
+                "invoice_id": null,
+                "status": "in_progress",
+                "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.\n[2026-08-31 boss] in_progress: Boss picked up the ticket.",
+                "created_at": "2026-08-31T16:55:00-04:00"
+              },
+              "linked": {
+                "inventory": {
+                  "sku": "CC-HOOD-NAVY",
+                  "name": "Basic Hoodie Big Yale",
+                  "size": "M",
+                  "qty": 8,
+                  "location": "Aisle A"
+                },
+                "pricing": {
+                  "sku": "CC-HOOD-NAVY",
+                  "unit_cost": 22.0,
+                  "list_price": 58.0
+                }
+              },
+              "drafts": [
+                {
+                  "id": 4,
+                  "kind": "restock_order",
+                  "recipient": "Bulldog Print Co",
+                  "subject": "Restock CC-HOOD-NAVY M x12",
+                  "created_by": "inventory"
+                }
+              ],
+              "payment_requests": []
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:30.085+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 2,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "draft_customer_message",
+                "args": {
+                  "ticket_id": 103,
+                  "recipient": "Yale AI Club",
+                  "subject": "Your hoodie quote and availability",
+                  "body": "Hi Yale AI Club,\n\nWe can fill 8 of the 20 size-M hoodies now. The remaining 12 are not yet confirmed for restock, so we can\u2019t promise when they\u2019ll be available.\n\nYour confirmed 15% discount applies to the full 20-unit order: $49.30 per hoodie, $986.00 total (list total $1,160.00).\n\nReply to let us know if you\u2019d like to proceed with the 8 available now at this quoted rate while the other 12 remain unconfirmed.\n\nBoola boola!"
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2472,
+              "output_tokens": 361
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:30.105+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "tool",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": null,
+          "model": null,
+          "detail": {
+            "tool": "draft_customer_message",
+            "via": "mcp",
+            "args": {
+              "ticket_id": 103,
+              "recipient": "Yale AI Club",
+              "subject": "Your hoodie quote and availability",
+              "body": "Hi Yale AI Club,\n\nWe can fill 8 of the 20 size-M hoodies now. The remaining 12 are not yet confirmed for restock, so we can\u2019t promise when they\u2019ll be available.\n\nYour confirmed 15% discount applies to the full 20-unit order: $49.30 per hoodie, $986.00 total (list total $1,160.00).\n\nReply to let us know if you\u2019d like to proceed with the 8 available now at this quoted rate while the other 12 remain unconfirmed.\n\nBoola boola!",
+              "actor": "customer_service"
+            },
+            "result": {
+              "saved": true,
+              "draft_id": 5,
+              "sent": false,
+              "note": "Saved as a draft on the board. Nothing was emailed."
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:33.508+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 3,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "summary": "Drafted a customer update for Yale AI Club with current availability and the confirmed full-order quote; it has not been sent.",
+                  "facts": [
+                    "Ticket 103 is for 20 size-M CC-HOOD-NAVY hoodies; ticket data shows 8 on hand.",
+                    "The provided confirmed quote is 15% off: $49.30 per unit and $986.00 total for 20 (list total $1,160.00).",
+                    "Existing restock draft #4 is for 12 units and remains a draft; the remaining 12 are not confirmed for restock."
+                  ],
+                  "actions": [
+                    "Customer message draft #5 saved; not sent."
+                  ],
+                  "blockers": [
+                    "Restock of the remaining 12 is not confirmed, so no arrival date was promised."
+                  ],
+                  "recommendation": "Have the customer review the quote and reply whether they want to proceed with the 8 available now."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 2875,
+              "output_tokens": 234
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:33.521+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "report",
+          "agent": "customer_service",
+          "chain": [
+            "boss",
+            "customer_service"
+          ],
+          "to": "boss",
+          "model": null,
+          "detail": {
+            "summary": "Drafted a customer update for Yale AI Club with current availability and the confirmed full-order quote; it has not been sent.",
+            "facts": [
+              "Ticket 103 is for 20 size-M CC-HOOD-NAVY hoodies; ticket data shows 8 on hand.",
+              "The provided confirmed quote is 15% off: $49.30 per unit and $986.00 total for 20 (list total $1,160.00).",
+              "Existing restock draft #4 is for 12 units and remains a draft; the remaining 12 are not confirmed for restock."
+            ],
+            "actions": [
+              "Customer message draft #5 saved; not sent."
+            ],
+            "blockers": [
+              "Restock of the remaining 12 is not confirmed, so no arrival date was promised."
+            ],
+            "recommendation": "Have the customer review the quote and reply whether they want to proceed with the 8 available now."
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:39.277+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "model_step",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna-global",
+          "detail": {
+            "step": 4,
+            "prompt": null,
+            "tool_calls": [
+              {
+                "tool": "final_result",
+                "args": {
+                  "ticket_id": 103,
+                  "decision": "Approved the 15% policy discount for all 20 hoodies and saved the customer update. The order is blocked for fulfillment: only 8 are on hand, and the 12-unit restock draft is $104.00 above available cash, so no restock is confirmed.",
+                  "status": "blocked",
+                  "who_worked": [
+                    "boss",
+                    "inventory",
+                    "accounting",
+                    "customer_service"
+                  ],
+                  "draft_ids": [
+                    4,
+                    5
+                  ],
+                  "discount": {
+                    "pct": 0.15,
+                    "unit_price": 49.3,
+                    "qty": 20,
+                    "total": 986.0,
+                    "within_policy": true,
+                    "needs_human": false
+                  },
+                  "note": "List total $1,160.00; discounted total $986.00. 8 of 20 size-M hoodies are in stock; 12-unit restock draft #4 costs $264.00. Available cash after requests is $160.00 (gap $104.00). Vendor lead time is 5 days; estimated ETA 2026-09-05 only if restock can be placed. Customer update draft #5 saved."
+                }
+              }
+            ],
+            "text": null,
+            "usage": {
+              "input_tokens": 4742,
+              "output_tokens": 640
+            }
+          }
+        },
+        {
+          "ts": "2026-10-29T23:02:39.318+00:00",
+          "run_id": "20261029T230127Z-ce2869",
+          "ticket_id": 103,
+          "kind": "decision",
+          "agent": "boss",
+          "chain": [
+            "boss"
+          ],
+          "to": null,
+          "model": "gpt-6-luna",
+          "detail": {
+            "ticket_id": 103,
+            "decision": "Approved the 15% policy discount for all 20 hoodies and saved the customer update. The order is blocked for fulfillment: only 8 are on hand, and the 12-unit restock draft is $104.00 above available cash, so no restock is confirmed.",
+            "status": "blocked",
+            "who_worked": [
+              "boss",
+              "inventory",
+              "accounting",
+              "customer_service"
+            ],
+            "payment_request_ids": [],
+            "draft_ids": [
+              4,
+              5
+            ],
+            "discount": {
+              "pct": 0.15,
+              "unit_price": 49.3,
+              "qty": 20,
+              "total": 986.0,
+              "within_policy": true,
+              "needs_human": false
+            },
+            "note": "List total $1,160.00; discounted total $986.00. 8 of 20 size-M hoodies are in stock; 12-unit restock draft #4 costs $264.00. Available cash after requests is $160.00 (gap $104.00). Vendor lead time is 5 days; estimated ETA 2026-09-05 only if restock can be placed. Customer update draft #5 saved."
+          }
+        }
+      ]
+    }
+  ],
+  "board_after": {
+    "tickets": {
+      "count": 1,
+      "tickets": [
+        {
+          "id": 103,
+          "type": "price_override",
+          "requester": "Yale AI Club",
+          "subject": "Bulk hoodie discount",
+          "status": "blocked",
+          "created_at": "2026-08-31T16:55:00-04:00"
+        }
+      ]
+    },
+    "payment_requests": {
+      "requests": [
+        {
+          "id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "payee": "Bulldog Print Co",
+          "reason": "Overdue vendor invoice blocking customer order ticket 101; request payment to unblock the vendor shipment.",
+          "ticket_id": 101,
+          "requested_by": "accounting",
+          "status": "paid",
+          "requested_on": "2026-08-31",
+          "decided_by": "Andres de Lima",
+          "decided_on": "2026-08-31",
+          "payment_id": 1
+        },
+        {
+          "id": 2,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "reason": "Request rent payment for Chapel Street shop, due 2026-09-02.",
+          "ticket_id": 102,
+          "requested_by": "accounting",
+          "status": "paid",
+          "requested_on": "2026-08-31",
+          "decided_by": "AdL",
+          "decided_on": "2026-08-31",
+          "payment_id": 2
+        }
+      ],
+      "account": "checking",
+      "balance": 160.0,
+      "as_of": "2026-08-31",
+      "committed_to_requests": 0,
+      "available_after_requests": 160.0
+    },
+    "drafts": {
+      "drafts": [
+        {
+          "id": 1,
+          "ticket_id": 101,
+          "kind": "customer_message",
+          "recipient": "Tauhid Zaman",
+          "subject": "Update on your Bulldog tee",
+          "body": "Hi Tauhid,\n\nThanks for your order! We don\u2019t have the CC-TEE-WHITE in size S available right now. We\u2019re waiting on a supplier restock; once it ships, the lead time is about 5 days, so I can\u2019t promise a firm calendar date yet.\n\nReply to confirm you\u2019d like us to keep your order open while we arrange the restock.",
+          "created_by": "customer_service",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        },
+        {
+          "id": 2,
+          "ticket_id": 101,
+          "kind": "restock_order",
+          "recipient": "Bulldog Print Co",
+          "subject": "Restock CC-TEE-WHITE S x1",
+          "body": "Restock request: 1 x Classic Bulldog Tee (CC-TEE-WHITE, size S). Estimated cost 1 x $8.00 = $8.00. Lead time 5 days -> ETA 2026-09-05 if placed 2026-08-31.",
+          "created_by": "inventory",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        },
+        {
+          "id": 3,
+          "ticket_id": 101,
+          "kind": "customer_message",
+          "recipient": "Tauhid Zaman",
+          "subject": "Updated Bulldog tee restock update",
+          "body": "Hi Tauhid,\n\nGood news: the supplier can now ship your CC-TEE-WHITE tee in size S. We have 0 in stock and are 1 short for your order. We haven't placed the supplier order yet; if placed today, its estimated arrival is 2026-09-05 (about 5 days).\n\nReply to confirm you'd like us to keep your order open while we arrange the restock.",
+          "created_by": "customer_service",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        },
+        {
+          "id": 4,
+          "ticket_id": 103,
+          "kind": "restock_order",
+          "recipient": "Bulldog Print Co",
+          "subject": "Restock CC-HOOD-NAVY M x12",
+          "body": "Restock request: 12 x Basic Hoodie Big Yale (CC-HOOD-NAVY, size M). Estimated cost 12 x $22.00 = $264.00. Lead time 5 days -> ETA 2026-09-05 if placed 2026-08-31.",
+          "created_by": "inventory",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        },
+        {
+          "id": 5,
+          "ticket_id": 103,
+          "kind": "customer_message",
+          "recipient": "Yale AI Club",
+          "subject": "Your hoodie quote and availability",
+          "body": "Hi Yale AI Club,\n\nWe can fill 8 of the 20 size-M hoodies now. The remaining 12 are not yet confirmed for restock, so we can\u2019t promise when they\u2019ll be available.\n\nYour confirmed 15% discount applies to the full 20-unit order: $49.30 per hoodie, $986.00 total (list total $1,160.00).\n\nReply to let us know if you\u2019d like to proceed with the 8 available now at this quoted rate while the other 12 remain unconfirmed.\n\nBoola boola!",
+          "created_by": "customer_service",
+          "created_on": "2026-08-31",
+          "status": "draft"
+        }
+      ]
+    }
+  },
+  "usage_total": {
+    "requests": 17,
+    "input_tokens": 49508,
+    "output_tokens": 4842
+  }
+}

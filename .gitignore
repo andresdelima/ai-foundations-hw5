@@ -1,0 +1,33 @@
+# ---- Secrets: never commit the real .env (only .env.example) ----
+.env
+.env.*
+!.env.example
+
+# ---- Data: BOTH databases are committed on purpose so graders can run the app ----
+# data/campus_customs.db      (original, used for resets)
+# data/campus_customs_new.db  (working copy, state after the P9 full run)
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ---- Python ----
+.venv
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# ---- Node / Vite ----
+node_modules/
+dist/
+
+# ---- Audit trail write helpers (the trail itself, output/audit_trail.json, is committed) ----
+*.json.tmp
+output/audit_trail.corrupt-*.json
+
+# ---- OS / editor ----
+.DS_Store
+.vscode/
+.idea/
+.claude/
+*.zip

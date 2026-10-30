@@ -1,0 +1,281 @@
+{
+  "run": "P9 full run after reset",
+  "model": "gpt-6-luna",
+  "starting_checking": 3400.0,
+  "ending_checking": 160.0,
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "final_status": "resolved",
+      "outcome": "Resolved. Invoice 501 ($840) paid after human approval, so Bulldog Print Co can ship; restock of 1 size S tee drafted (ETA 2026-09-05) and Tauhid's update drafted.",
+      "agents": {
+        "boss": "Read the ticket, sent the stock question to Inventory first, had Customer Service write last; first call waiting_approval, then resolved on the follow-up once invoice 501 was paid.",
+        "inventory": "Found CC-TEE-WHITE S at 0 (short 1) and Bulldog Print Co blocked by open invoice 501; asked Accounting to clear it. After payment, drafted restock #2 (1 x $8.00, ETA 2026-09-05).",
+        "accounting": "Checked cash and open invoices and created payment request #1 for invoice 501 ($840.00), pending human approval (unblock-first rule).",
+        "customer_service": "Drafted #1 to Tauhid (out of stock, 5-day lead time once the supplier can ship) and, after payment, updated draft #3 with the Sept 5 estimate. Nothing sent."
+      },
+      "delegations": [
+        "boss -> inventory",
+        "inventory -> accounting",
+        "boss -> customer_service",
+        "boss -> inventory",
+        "boss -> customer_service"
+      ],
+      "tools_by_agent": {
+        "boss": [
+          "get_ticket",
+          "list_payment_requests"
+        ],
+        "inventory": [
+          "check_order_fill",
+          "draft_restock_order",
+          "get_shop_date",
+          "get_ticket",
+          "get_vendor_status"
+        ],
+        "accounting": [
+          "get_cash_balance",
+          "list_open_invoices",
+          "request_payment"
+        ],
+        "customer_service": [
+          "draft_customer_message",
+          "get_ticket",
+          "list_drafts"
+        ]
+      },
+      "human_approval": [
+        {
+          "request_id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "payee": "Bulldog Print Co",
+          "requested_by": "accounting",
+          "status": "paid",
+          "approved_by": "AdL",
+          "approved_at": "2026-10-30T00:36:43.267+00:00",
+          "payment_id": 1
+        }
+      ],
+      "cash": {
+        "before": 3400.0,
+        "change": -840.0,
+        "after": 2560.0
+      },
+      "drafts": [
+        {
+          "id": 1,
+          "ticket_id": 101,
+          "kind": "customer_message",
+          "recipient": "Tauhid Zaman",
+          "subject": "Update on your Bulldog tee",
+          "created_by": "customer_service"
+        },
+        {
+          "id": 2,
+          "ticket_id": 101,
+          "kind": "restock_order",
+          "recipient": "Bulldog Print Co",
+          "subject": "Restock CC-TEE-WHITE S x1",
+          "created_by": "inventory"
+        },
+        {
+          "id": 3,
+          "ticket_id": 101,
+          "kind": "customer_message",
+          "recipient": "Tauhid Zaman",
+          "subject": "Updated ETA for your Bulldog tee",
+          "created_by": "customer_service"
+        }
+      ],
+      "discount": null,
+      "runs": [
+        "20261030T001542Z-8b0d83",
+        "20261030T003643Z-7da35a"
+      ],
+      "model_calls": 26,
+      "tokens": {
+        "input": 76223,
+        "output": 4484
+      },
+      "boss_final_call": "Invoice 501 is paid, and the one-unit restock and updated customer message are saved. Ticket resolved; the customer update gives the expected arrival date as 2026-09-05."
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "final_status": "resolved",
+      "outcome": "Resolved. Rent of $2,400 for the Chapel Street shop paid after human approval (on time, due 2026-09-02); lease next_due now 2026-10-02. A landlord note was drafted that wrongly flags a date discrepancy (draft only).",
+      "agents": {
+        "boss": "Sent the rent notice to Facilities first, then routed the rent to Accounting; first call waiting_approval, resolved on the follow-up after the rent was paid.",
+        "facilities": "Confirmed lease 1: $2,400.00 due 2026-09-02, not yet due as of 2026-08-31. In the follow-up, misread the lease's moved next_due (2026-10-02) as a conflict and asked Customer Service for a landlord note.",
+        "accounting": "Saw $2,560.00 free after request #1 and created payment request #2 for rent ($2,400.00), leaving $160.00 free; pending human approval.",
+        "customer_service": "Drafted #4 to Elm City Properties asking them to confirm the due date (unnecessary: the 09-02 period was paid, which moved next_due to 10-02). Nothing sent."
+      },
+      "delegations": [
+        "boss -> facilities",
+        "boss -> accounting",
+        "boss -> facilities",
+        "facilities -> customer_service"
+      ],
+      "tools_by_agent": {
+        "boss": [
+          "get_ticket",
+          "list_drafts",
+          "list_payment_requests"
+        ],
+        "facilities": [
+          "get_cash_balance",
+          "get_lease_rent",
+          "get_ticket"
+        ],
+        "accounting": [
+          "get_cash_balance",
+          "get_lease_rent",
+          "list_payment_requests",
+          "request_payment"
+        ],
+        "customer_service": [
+          "draft_customer_message",
+          "get_shop_date",
+          "get_ticket",
+          "list_drafts"
+        ]
+      },
+      "human_approval": [
+        {
+          "request_id": 2,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "requested_by": "accounting",
+          "status": "paid",
+          "approved_by": "AdL",
+          "approved_at": "2026-10-30T00:38:34.541+00:00",
+          "payment_id": 2
+        }
+      ],
+      "cash": {
+        "before": 2560.0,
+        "change": -2400.0,
+        "after": 160.0
+      },
+      "drafts": [
+        {
+          "id": 4,
+          "ticket_id": 102,
+          "kind": "customer_message",
+          "recipient": "Elm City Properties",
+          "subject": "Rent notice and due date",
+          "created_by": "customer_service"
+        }
+      ],
+      "discount": null,
+      "runs": [
+        "20261030T001635Z-59af31",
+        "20261030T003834Z-7d9578"
+      ],
+      "model_calls": 20,
+      "tokens": {
+        "input": 56265,
+        "output": 5110
+      },
+      "boss_final_call": "Rent payment request #2 is paid, and draft #4 is saved asking Elm City Properties to reconcile the conflicting due dates. No further payment request or duplicate draft is needed; the ticket is resolved with the discrepancy documented in the draft."
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "final_status": "resolved",
+      "outcome": "Resolved. 15% bulk discount approved on all 20 hoodies ($49.30 each, $986.00) within policy; 8 can ship now; restock of 12 drafted but unfunded ($264 vs $160 available, $104 gap); club's update drafted. No money moved.",
+      "agents": {
+        "boss": "Sent Inventory first, priced the order itself with check_discount_policy (15% on all 20: $49.30 each, $986.00, within policy), asked Accounting about the restock cash, had Customer Service write last; resolved with the $104 cash gap noted.",
+        "inventory": "Found 8 of 20 size M (short 12); vendor could ship (invoice 501 already paid), so drafted restock #5 (12 x $22.00 = $264.00, ETA 2026-09-05 if placed). Re-confirmed stock when Customer Service asked.",
+        "accounting": "Confirmed $160.00 free after payments, so the $264.00 restock has a $104.00 gap; created no payment request. Answered cross-checks from Customer Service and Inventory.",
+        "customer_service": "Cross-checked stock and funding with Inventory and Accounting, then drafted #6 to the Yale AI Club: 8 ship now, 12 after a restock, $49.30 each / $986.00 for all 20. Nothing sent."
+      },
+      "delegations": [
+        "boss -> inventory",
+        "boss -> accounting",
+        "boss -> customer_service",
+        "customer_service -> inventory",
+        "customer_service -> accounting",
+        "inventory -> accounting"
+      ],
+      "tools_by_agent": {
+        "boss": [
+          "check_discount_policy",
+          "get_ticket"
+        ],
+        "inventory": [
+          "check_order_fill",
+          "draft_restock_order",
+          "get_shop_date",
+          "get_ticket",
+          "get_vendor_status",
+          "list_vendors"
+        ],
+        "accounting": [
+          "check_order_fill",
+          "get_cash_balance",
+          "get_ticket",
+          "get_vendor_status",
+          "list_payment_requests"
+        ],
+        "customer_service": [
+          "draft_customer_message",
+          "get_ticket",
+          "list_drafts"
+        ]
+      },
+      "human_approval": null,
+      "cash": {
+        "before": 160.0,
+        "change": 0,
+        "after": 160.0
+      },
+      "drafts": [
+        {
+          "id": 5,
+          "ticket_id": 103,
+          "kind": "restock_order",
+          "recipient": "Bulldog Print Co",
+          "subject": "Restock CC-HOOD-NAVY M x12",
+          "created_by": "inventory"
+        },
+        {
+          "id": 6,
+          "ticket_id": 103,
+          "kind": "customer_message",
+          "recipient": "Yale AI Club",
+          "subject": "Your hoodie order update",
+          "created_by": "customer_service"
+        }
+      ],
+      "discount": {
+        "pct": 0.15,
+        "unit_price": 49.3,
+        "qty": 20,
+        "total": 986.0,
+        "within_policy": true,
+        "needs_human": false
+      },
+      "runs": [
+        "20261030T003940Z-d764e7"
+      ],
+      "model_calls": 25,
+      "tokens": {
+        "input": 75406,
+        "output": 7015
+      },
+      "boss_final_call": "Approved the policy-compliant 15% discount: $49.30 per hoodie, $986.00 total for all 20. Eight size-M hoodies are in stock; the remaining 12 are contingent on the saved restock draft being funded and placed, so the ticket is resolved with the customer update and restock draft saved."
+    }
+  ]
+}
